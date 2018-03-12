@@ -1,5 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <functional>
+
 
 using namespace std;
 class Vector
@@ -23,11 +25,12 @@ class Vector
 
     Vector slice(int start, int end);
 
-    void transform(double (*func)(double));
+    // void transform(double (*func)(double));
+    void transform(function<double (double)>);
 
-    Vector map(double (*func)(double));
+    Vector map(function<double (double)>);
 
-    void foreach(void (*func)(double));
+    void foreach(function<void (double)>);
 };
 
 #endif // VECTOR_H

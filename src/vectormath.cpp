@@ -4,6 +4,8 @@
 
 using namespace std;
 
+double square(double x) { return x*x; }
+
 Vector zeros(int size)
 {
   Vector V(size);
@@ -47,6 +49,16 @@ double mean(Vector v)
 {
   int n = v.length;
   double result = sum(v) / n;
+
+  return result;
+}
+
+double var(Vector v)
+{
+  int n = v.length;
+  int m = mean(v);
+  
+  double result = sum(v.map( [m](double x){ return square(x-m); } )) / (n-1);
 
   return result;
 }

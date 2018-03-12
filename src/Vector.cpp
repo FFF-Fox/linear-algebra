@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <functional>
 #include "Vector.h"
 
 using namespace std;
@@ -60,28 +61,29 @@ Vector Vector::slice(int start, int end)
   return out;
 }
 
-void Vector::transform(double (*func)(double))
+// void Vector::transform(double (*func)(double))
+void Vector::transform(function<double (double)> func)
 {
   for (int i=0; i<length; i++)
   {
-    v[i] = (*func)(v[i]);
+    v[i] = func(v[i]);
   }
 }
 
-Vector Vector::map(double (*func)(double))
+Vector Vector::map(function<double (double)> func)
 {
   Vector out(length);
 
   for (int i=0; i<length; i++)
   {
-    double value = (*func)(v[i]);
+    double value = func(v[i]);
     out.set(i,value);
   }
 
   return out;
 }
 
-void Vector::foreach(void (*func)(double))
+void Vector::foreach(function<void (double)> func)
 {
-  for (int i=0; i<length; i++) { (*func)(v[i]); }
+  for (int i=0; i<length; i++) { func(v[i]); }
 }
