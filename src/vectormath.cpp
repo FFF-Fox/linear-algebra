@@ -57,8 +57,12 @@ double var(Vector v)
 {
   int n = v.length;
   int m = mean(v);
-  
-  double result = sum(v.map( [m](double x){ return square(x-m); } )) / (n-1);
+
+  double result = 0.0;
+  if (n>1)
+  {
+    result = sum(v.map( [m](double x){ return square(x-m); } )) / (n-1);
+  }
 
   return result;
 }
